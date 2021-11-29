@@ -23,6 +23,8 @@
 
 #include <Wire.h>
 
+#include "shtxx_submodule_interface.h"
+
 //#define ENABLE_DBG
 
 #ifdef ENABLE_DBG
@@ -101,7 +103,7 @@
   (0x610B) // Write alert limits, low clear
 #define SHT3X_CMD_WRITE_LOW_ALERT_LIMIT_SET                                    \
   (0x6100) // Write alert limits, low set
-class DFRobot_SHT3x {
+class DFRobot_SHT3x : public Shtxx_submodule_interface {
 public:
 #define ERR_OK 0          // No error
 #define ERR_DATA_BUS -1   // Data bus error
@@ -216,7 +218,7 @@ public:
   } sLimitData_t;
 
 public:
-  DFRobot_SHT3x(TwoWire *pWire = &Wire, uint8_t address = 0x45,
+  DFRobot_SHT3x(TwoWire *pWire = &Wire, uint8_t address = 0x44,
                 uint8_t RST = 4);
 
   void init();

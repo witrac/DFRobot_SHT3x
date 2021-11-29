@@ -296,7 +296,10 @@ DFRobot_SHT3x::sRHAndTemp_t DFRobot_SHT3x::readTemperatureAndHumidity() {
   if ((checkCrc(rawTemperature) != rawTemperature[2]) ||
       (checkCrc(rawHumidity) != rawHumidity[2])) {
     tempRH.ERR = -1;
-    return ERROR_BAD_CRC;
+    tempRH.TemperatureC = ERROR_BAD_CRC;
+    tempRH.TemperatureF = ERROR_BAD_CRC;
+    tempRH.Humidity = ERROR_BAD_CRC;
+    return tempRH;
   }
   tempRH.TemperatureC = convertTemperature(rawTemperature);
   tempRH.Humidity = convertHumidity(rawHumidity);
